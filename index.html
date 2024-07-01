@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login page </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="box">
+        <div class="form">
+            <h2>Login Form</h2>
+            <form>
+                <div class="inputbox">
+                    <input type="text" id="username" required value="">
+                    <span>Username</span>
+                </div>
+                <div class="inputbox">
+                    <input type="email" id="email" required value="">
+                    <span>E-mail</span>
+                </div>
+                <div class="inputbox">
+                    <input type="text" id="phone" required value="">
+                    <span>Phone No.</span>
+                </div>
+                <input type="submit" value="submit" class="stylesub">
+            </form>
+        </div>
+    </div>
+    <script type="module">
+        
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCqKwTYi0DK8gAu9XHZnF0mIySPCLQA7t8",
+            authDomain: "login-19e20.firebaseapp.com",
+            projectId: "login-19e20",
+            storageBucket: "login-19e20.appspot.com",
+            messagingSenderId: "677146663905",
+            appId: "1:677146663905:web:9710d6d2f99f447b0410a0"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+        // Get ref to database services
+        const db = getDatabase(app);
+
+        // Add event listener to the submit button
+        const submitButton = document.querySelector(".stylesub");
+        submitButton.addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent form submission
+
+            set(ref(db, 'user/' + document.getElementById("username").value), {
+                username: document.getElementById("username").value,
+                email: document.getElementById("email").value,
+                phoneNo: document.getElementById("phone").value
+            });
+
+            alert("Login Successful");
+        });
+    </script>
+
+</body>
+</html>
